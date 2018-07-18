@@ -37,3 +37,17 @@ func UpdatePlanetSettings(w http.ResponseWriter, r *http.Request) {
     manager.UpdatePlanetSettings(planet, settings)
     utils.SendJsonResponse(w, 200, settings)
 }
+
+func UpdatePlanetName(w http.ResponseWriter, r *http.Request) {
+    player := context.Get(r, "player").(*model.Player)
+    
+    id, _ := strconv.ParseUint(mux.Vars(r)["id"], 10, 16)
+    planet := manager.GetPlanet(uint16(id), player.Id)
+
+    if player.Id != planet.Player.Id {
+        panic(exception.NewHttpException(http.StatusForbidden, "", nil))
+    }
+    data := utils.DecodeJsonRequest(r)
+    manager.UpdatePlanetName(planet, name)
+    utils.SendJsonResponse(w, 200, name)
+}

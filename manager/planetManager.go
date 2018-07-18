@@ -172,6 +172,13 @@ func UpdatePlanetStorage(planet *model.Planet) {
     }
 }
 
+func UpdatePlanetName(planet *model.Planet, name string) {
+    planet.Name = name
+    if err := database.Connection.Update(); err != nil {
+        panic(exception.NewException("Planet could not be updated", err))
+    }
+}
+
 func calculatePopulationPoints(planet *model.Planet) uint8 {
     return uint8(math.Ceil(float64(planet.Population / 100000)))
 }
