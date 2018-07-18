@@ -174,7 +174,7 @@ func UpdatePlanetStorage(planet *model.Planet) {
 
 func UpdatePlanetName(planet *model.Planet, name string) {
     planet.Name = name
-    if err := database.Connection.Update(); err != nil {
+    if err := database.Connection.Update(planet); err != nil {
         panic(exception.NewException("Planet could not be updated", err))
     }
 }

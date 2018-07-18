@@ -166,7 +166,7 @@ var routes = Routes{
 		"/api/planets/{id}/name",
 		controller.UpdatePlanetName,
 		true,
-	}
+	},
 	Route{
 		"Get Factions",
 		"GET",

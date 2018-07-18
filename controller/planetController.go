@@ -47,7 +47,8 @@ func UpdatePlanetName(w http.ResponseWriter, r *http.Request) {
     if player.Id != planet.Player.Id {
         panic(exception.NewHttpException(http.StatusForbidden, "", nil))
     }
+
     data := utils.DecodeJsonRequest(r)
-    manager.UpdatePlanetName(planet, name)
-    utils.SendJsonResponse(w, 200, name)
+    manager.UpdatePlanetName(planet, data["name"].(string))
+    utils.SendJsonResponse(w, 200, data["name"].(string))
 }
